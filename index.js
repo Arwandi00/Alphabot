@@ -2950,8 +2950,10 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
             break
          case 'h':
          case 'hidetag':
+         case 'ohidetag':
             if (!m.isGroup) return reply(lang.groupOnly())
             if (!(isGroupAdmins || isGroupOwner)) return reply(lang.adminOnly())
+            if (!m.key.fromMe && !isCreator) return reply(lang.ownerOnly())
             alpha.sendMessage(from, {
                text: q ? q : '',
                mentions: participants.map(a => a.id)
